@@ -1,0 +1,225 @@
+[gd_scene load_steps=8 format=3 uid="uid://explore0one"]
+
+[ext_resource type="Script" path="res://scripts/explore_zone.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://player0001" path="res://scenes/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://enemy0001" path="res://scenes/enemy.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://tower0001" path="res://scenes/tower.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://upgradepanel" path="res://scenes/ui/upgrade_panel.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://buildspot" path="res://scenes/build_spot.tscn" id="6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/wall.png" id="7"]
+[ext_resource type="Script" path="res://scripts/wave_manager.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://facility" path="res://scenes/facility.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://gameover" path="res://scenes/ui/game_over_panel.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://towerupgrade" path="res://scenes/ui/tower_upgrade_panel.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://boss0001" path="res://scenes/boss.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://pausemenu" path="res://scenes/ui/pause_menu.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://victory" path="res://scenes/ui/victory_panel.tscn" id="14"]
+
+[sub_resource type="RectangleShape2D" id="wall_h"]
+size = Vector2(200, 20)
+
+[sub_resource type="RectangleShape2D" id="wall_v"]
+size = Vector2(20, 150)
+
+[sub_resource type="RectangleShape2D" id="wall_small"]
+size = Vector2(80, 20)
+
+[node name="ExploreZone" type="Node2D"]
+script = ExtResource("1")
+enemy_scene = ExtResource("3")
+player_scene = ExtResource("2")
+tower_scene = ExtResource("4")
+upgrade_panel_scene = ExtResource("5")
+build_spot_scene = ExtResource("6")
+facility_scene = ExtResource("9")
+game_over_panel_scene = ExtResource("10")
+tower_upgrade_panel_scene = ExtResource("11")
+boss_scene = ExtResource("12")
+pause_menu_scene = ExtResource("13")
+victory_panel_scene = ExtResource("14")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -250)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("wall_h")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/TopWall"]
+texture = ExtResource("7")
+scale = Vector2(12.5, 1.25)
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 250)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+shape = SubResource("wall_h")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomWall"]
+texture = ExtResource("7")
+scale = Vector2(12.5, 1.25)
+
+[node name="LeftWallTop" type="StaticBody2D" parent="Walls"]
+position = Vector2(-400, -170)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWallTop"]
+shape = SubResource("wall_v")
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LeftWallTop"]
+texture = ExtResource("7")
+scale = Vector2(1.25, 9.375)
+rotation = 1.5708
+
+[node name="LeftWallBottom" type="StaticBody2D" parent="Walls"]
+position = Vector2(-400, 170)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWallBottom"]
+shape = SubResource("wall_v")
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LeftWallBottom"]
+texture = ExtResource("7")
+scale = Vector2(1.25, 9.375)
+rotation = 1.5708
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(400, 0)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("wall_v")
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RightWall"]
+texture = ExtResource("7")
+scale = Vector2(1.25, 15.625)
+rotation = 1.5708
+
+[node name="Ruin1" type="StaticBody2D" parent="Walls"]
+position = Vector2(-100, -100)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ruin1"]
+shape = SubResource("wall_small")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ruin1"]
+texture = ExtResource("7")
+scale = Vector2(5, 1.25)
+
+[node name="Ruin2" type="StaticBody2D" parent="Walls"]
+position = Vector2(-100, 100)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ruin2"]
+shape = SubResource("wall_small")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ruin2"]
+texture = ExtResource("7")
+scale = Vector2(5, 1.25)
+
+[node name="Ruin3" type="StaticBody2D" parent="Walls"]
+position = Vector2(100, 0)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ruin3"]
+shape = SubResource("wall_v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ruin3"]
+texture = ExtResource("7")
+scale = Vector2(1.25, 6.25)
+rotation = 1.5708
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-380, -80)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-380, 80)
+
+[node name="BuildSpots" type="Node2D" parent="."]
+
+[node name="Spot1" parent="BuildSpots" instance=ExtResource("6")]
+position = Vector2(-200, -150)
+
+[node name="Spot2" parent="BuildSpots" instance=ExtResource("6")]
+position = Vector2(-200, 150)
+
+[node name="Spot3" parent="BuildSpots" instance=ExtResource("6")]
+position = Vector2(0, -150)
+
+[node name="Spot4" parent="BuildSpots" instance=ExtResource("6")]
+position = Vector2(0, 150)
+
+[node name="Spot5" parent="BuildSpots" instance=ExtResource("6")]
+position = Vector2(200, 0)
+
+[node name="Facilities" type="Node2D" parent="."]
+
+[node name="WaveManager" type="Node2D" parent="."]
+script = ExtResource("8")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MoneyLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "金钱: 100"
+
+[node name="WeaponHint" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 75.0
+text = "武器: 手枪"
+
+[node name="WaveLabel" type="Label" parent="UI"]
+offset_left = 440.0
+offset_top = 20.0
+offset_right = 840.0
+offset_bottom = 50.0
+text = "波次: 准备中"
+horizontal_alignment = 1
+
+[node name="BossHPBar" type="ProgressBar" parent="UI"]
+offset_left = 340.0
+offset_top = 55.0
+offset_right = 940.0
+offset_bottom = 80.0
+show_percentage = false
+visible = false
+
+[node name="BossLabel" type="Label" parent="UI/BossHPBar"]
+offset_left = 0.0
+offset_top = -18.0
+offset_right = 600.0
+offset_bottom = 0.0
+text = "BOSS"
+horizontal_alignment = 1
+
+[node name="BuildHint" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 700.0
+offset_bottom = 105.0
+text = "建造模式"
+
+[node name="TowerBar" type="VBoxContainer" parent="UI"]
+offset_left = 1080.0
+offset_top = 100.0
+offset_right = 1260.0
+offset_bottom = 300.0
+theme_override_constants/separation = 6

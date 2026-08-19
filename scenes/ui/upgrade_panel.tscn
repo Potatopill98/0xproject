@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://upgradepanel"]
+
+[ext_resource type="Script" path="res://scripts/upgrade_panel.gd" id="1"]
+
+[node name="UpgradePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -280.0
+offset_right = 250.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 430.0
+offset_bottom = 45.0
+text = "大本营 - 升级终端"
+
+[node name="MoneyLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 480.0
+offset_bottom = 75.0
+text = "金钱: 0"
+
+[node name="CloseBtn" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 15.0
+offset_right = 480.0
+offset_bottom = 45.0
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 85.0
+offset_right = 480.0
+offset_bottom = 540.0
+horizontal_scroll_mode = 0
+
+[node name="Content" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StatsLabel" type="Label" parent="Panel/ScrollContainer/Content"]
+layout_mode = 2
+text = "—— 属性升级 ——"
+
+[node name="StatsContainer" type="VBoxContainer" parent="Panel/ScrollContainer/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="WeaponsLabel" type="Label" parent="Panel/ScrollContainer/Content"]
+layout_mode = 2
+text = "—— 武器 ——"
+
+[node name="WeaponsContainer" type="VBoxContainer" parent="Panel/ScrollContainer/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6

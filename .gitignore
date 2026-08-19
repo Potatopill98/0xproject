@@ -1,0 +1,29 @@
+# Godot 4 generated files
+.godot/
+*.translation
+
+# Mono / C#
+.mono/
+data_*/
+*.tmp
+*.tmp.*
+
+# Export
+exports/
+*.apk
+*.exe
+*.pck
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project temp
+*.log

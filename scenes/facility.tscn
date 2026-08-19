@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://facility"]
+
+[ext_resource type="Script" path="res://scripts/facility.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/wall.png" id="2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 25.0
+
+[node name="Facility" type="Area2D"]
+script = ExtResource("1")
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+scale = Vector2(2, 2)
+modulate = Color(0.4, 0.4, 0.4, 1)
+
+[node name="HintLabel" type="Label" parent="."]
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = -20.0
+text = "设施"
+horizontal_alignment = 1

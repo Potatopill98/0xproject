@@ -1,0 +1,127 @@
+[gd_scene load_steps=6 format=3 uid="uid://base0001"]
+
+[ext_resource type="Script" path="res://scripts/base.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://player0001" path="res://scenes/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://upgradepanel" path="res://scenes/ui/upgrade_panel.tscn" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/wall.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://pausemenu" path="res://scenes/ui/pause_menu.tscn" id="5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_term"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(60, 30)
+
+[node name="Base" type="Node2D"]
+script = ExtResource("1")
+player_scene = ExtResource("2")
+upgrade_panel_scene = ExtResource("3")
+pause_menu_scene = ExtResource("5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -150)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("RectangleShape2D_term")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/TopWall"]
+texture = ExtResource("4")
+scale = Vector2(25, 2.5)
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 150)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+shape = SubResource("RectangleShape2D_term")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomWall"]
+texture = ExtResource("4")
+scale = Vector2(25, 2.5)
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-200, 0)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("RectangleShape2D_exit")
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LeftWall"]
+texture = ExtResource("4")
+scale = Vector2(2.5, 18.75)
+rotation = 1.5708
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(200, 0)
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_exit")
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RightWall"]
+texture = ExtResource("4")
+scale = Vector2(2.5, 18.75)
+rotation = 1.5708
+
+[node name="Terminal" type="Area2D" parent="."]
+position = Vector2(-100, -80)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terminal"]
+shape = SubResource("RectangleShape2D_term")
+
+[node name="Sprite2D" type="Sprite2D" parent="Terminal"]
+texture = ExtResource("4")
+modulate = Color(0.2, 0.8, 1, 1)
+scale = Vector2(2.5, 2.5)
+
+[node name="Label" type="Label" parent="Terminal"]
+offset_left = -30.0
+offset_top = -45.0
+offset_right = 30.0
+offset_bottom = -25.0
+text = "升级终端"
+horizontal_alignment = 1
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(100, 100)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="ExitArea"]
+texture = ExtResource("4")
+modulate = Color(0.2, 1, 0.3, 1)
+scale = Vector2(3.75, 1.875)
+
+[node name="Label" type="Label" parent="ExitArea"]
+offset_left = -40.0
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -15.0
+text = "出口"
+horizontal_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HintLabel" type="Label" parent="UI"]
+offset_left = 440.0
+offset_top = 680.0
+offset_right = 840.0
+offset_bottom = 710.0
+text = "按 E 交互"
+horizontal_alignment = 1
+visible = false

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://buildspot"]
+
+[ext_resource type="Script" path="res://scripts/build_spot.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://tower0001" path="res://scenes/tower.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/wall.png" id="3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 20.0
+
+[node name="BuildSpot" type="Area2D"]
+script = ExtResource("1")
+tower_scene = ExtResource("2")
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+modulate = Color(0.3, 0.5, 0.3, 1)
+scale = Vector2(1.5, 1.5)
+
+[node name="HintLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -15.0
+text = "建塔点"
+horizontal_alignment = 1

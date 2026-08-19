@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://tower0001"]
+
+[ext_resource type="Script" path="res://scripts/tower.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bullet0001" path="res://scenes/bullet.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tower.png" id="3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 150.0
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1")
+bullet_scene = ExtResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+scale = Vector2(0.5, 0.5)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(12, 0)
+
+[node name="RangeIndicator" type="Node2D" parent="."]
+
+[node name="RangeCircle" type="CollisionShape2D" parent="RangeIndicator"]
+shape = SubResource("CircleShape2D_1")
+disabled = true

@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://main0001"]
+
+[ext_resource type="Script" uid="uid://dga84lug1aqac" path="res://scripts/main.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://player0001" path="res://scenes/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://enemy0001" path="res://scenes/enemy.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://tower0001" path="res://scenes/tower.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bogaibobucstg" path="res://assets/sprites/wall.png" id="5"]
+[ext_resource type="PackedScene" uid="uid://upgradepanel" path="res://scenes/ui/upgrade_panel.tscn" id="6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall1"]
+size = Vector2(300, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall2"]
+size = Vector2(300, 20)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+enemy_scene = ExtResource("3")
+player_scene = ExtResource("2")
+tower_scene = ExtResource("4")
+upgrade_panel_scene = ExtResource("6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-400, -300)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(400, -300)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-400, 300)
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(400, 300)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall1" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -200)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall1"]
+shape = SubResource("RectangleShape2D_wall1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall1"]
+scale = Vector2(18.75, 1.25)
+texture = ExtResource("5")
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 200)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+shape = SubResource("RectangleShape2D_wall2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall2"]
+scale = Vector2(18.75, 1.25)
+texture = ExtResource("5")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MoneyLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "金钱: 100"
+
+[node name="WeaponHint" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 75.0
+text = "武器: 手枪"
+
+[node name="BuildHint" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 105.0
+text = "建造模式"
+
+[node name="TowerBar" type="VBoxContainer" parent="UI"]
+offset_left = 1080.0
+offset_top = 100.0
+offset_right = 1260.0
+offset_bottom = 300.0
+theme_override_constants/separation = 6

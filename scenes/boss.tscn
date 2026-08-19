@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://boss0001"]
+
+[ext_resource type="Script" path="res://scripts/boss.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemy.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://damagenumber" path="res://scenes/damage_number.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://explosion" path="res://scenes/explosion.tscn" id="4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(20, 24)
+
+[node name="Boss" type="CharacterBody2D"]
+script = ExtResource("1")
+damage_number_scene = ExtResource("3")
+explosion_scene = ExtResource("4")
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="HPBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = -16.0
+show_percentage = false
