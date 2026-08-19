@@ -1,6 +1,7 @@
 # Godot 4 generated files
 .godot/
 *.translation
+*.uid
 
 # Mono / C#
 .mono/
@@ -27,3 +28,19 @@ Thumbs.db
 
 # Project temp
 *.log
+
+# Dev temp files (raw downloads, previews, processed intermediates)
+raw_*.png
+player_*.png
+enemy_*.png
+tower_*.png
+preview_*.png
+processed/
+*_preview.png
+*_raw.png
+*_16.png
+*_32.png
+*_new.png
+*_flipped.png
+process_art*.ps1
+tower_preview.png
